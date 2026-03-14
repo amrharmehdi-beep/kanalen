@@ -1,0 +1,35 @@
+name: Build IPTV Playlist
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build merged playlist
+        run: |
+          mkdir -p output
+          echo "#EXTM3U" > output/playlist.m3u
+
+          for code in qa eg sa ae ma; do
+            echo "" >> output/playlist.m3u
+            curl -L "https://iptv-org.github.io/iptv/countries/${code}.m3u" | tail -n +2 >> output/playlist.m3u
+          done
+
+      - name: Commit playlist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/playlist.m3u
+          git commit -m "Update merged playlist" || echo "No changes to commit"
+          git push
