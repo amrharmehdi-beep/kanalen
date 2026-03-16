@@ -1,89 +1,127 @@
-import re
-import urllib.request
+name: Build IPTV Playlist
 
-countries = ["qa", "eg", "sa", "ae", "ma"]
-urls = [f"https://iptv-org.github.io/iptv/countries/{code}.m3u" for code in countries]
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
 
-entries = []
+permissions:
+  contents: write
 
-def fetch(url):
-    with urllib.request.urlopen(url, timeout=30) as r:
-        return r.read().decode("utf-8", errors="ignore")
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-def channel_name(extinf_line):
-    m = re.search(r',\s*(.*)$', extinf_line)
-    return m.group(1).strip() if m else ""
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-def normalize_extinf(extinf_line):
-    line = extinf_line.strip()
+      - name: Build merged playlist
+        shell: bash
+        run: |
+          set -e
+          mkdir -p output
 
-    if not line.startswith("#EXTINF:"):
-        return line
+          python3 << 'PY'
+          import re
+          import urllib.request
 
-    if 'group-title="' in line:
-        line = re.sub(r'group-title="[^"]*"', 'group-title="Arabic IPTV"', line)
-    else:
-        line = line.replace("#EXTINF:-1", '#EXTINF:-1 group-title="Arabic IPTV"', 1)
+          countries = ["qa", "eg", "sa", "ae", "ma"]
+          urls = [f"https://iptv-org.github.io/iptv/countries/{code}.m3u" for code in countries]
 
-    return line
+          entries = []
 
-seen_urls = set()
+          def fetch(url):
+              with urllib.request.urlopen(url, timeout=30) as r:
+                  return r.read().decode("utf-8", errors="ignore")
 
-for url in urls:
-    text = fetch(url)
-    lines = text.splitlines()
+          def channel_name(extinf_line):
+              m = re.search(r',\s*(.*)$', extinf_line)
+              return m.group(1).strip() if m else ""
 
-    i = 0
-    while i < len(lines):
-        line = lines[i].strip()
-        if line.startswith("#EXTINF:"):
-            extinf = normalize_extinf(line)
-            name = channel_name(extinf).lower()
+          def normalize_extinf(extinf_line):
+              line = extinf_line.strip()
 
-            j = i + 1
-            stream_url = ""
-            while j < len(lines):
-                candidate = lines[j].strip()
-                if candidate and not candidate.startswith("#"):
-                    stream_url = candidate
-                    break
-                j += 1
+              if not line.startswith("#EXTINF:"):
+                  return line
 
-            # Skip slow/bad Al Aoula HD entries from source playlists
-            blocked_names = [
-                "al aula hd",
-                "al aoula hd",
-                "al oula hd",
-                "aloula hd"
-            ]
+              if 'group-title="' in line:
+                  line = re.sub(r'group-title="[^"]*"', 'group-title="Arabic IPTV"', line)
+              else:
+                  line = line.replace("#EXTINF:-1", '#EXTINF:-1 group-title="Arabic IPTV"', 1)
 
-            if stream_url and stream_url not in seen_urls and not any(b in name for b in blocked_names):
-                seen_urls.add(stream_url)
-                entries.append((name, extinf, stream_url))
+              return line
 
-            i = j
-        i += 1
+          seen_urls = set()
 
-# Add manual replacement
-manual_channels = [
-    (
-        "al aoula international",
-        '#EXTINF:-1 tvg-id="AlAoula.ma@Inter" tvg-name="Al Aoula International" tvg-logo="https://i.imgur.com/5Q7aW5C.png" group-title="Arabic IPTV",Al Aoula International',
-        "https://uvotv-aniview.global.ssl.fastly.net/hls/live/2119051/aloulainter/playlist.m3u8"
-    )
-]
+          for url in urls:
+              text = fetch(url)
+              lines = text.splitlines()
 
-for name, extinf, stream_url in manual_channels:
-    if stream_url not in seen_urls:
-        seen_urls.add(stream_url)
-        entries.append((name.lower(), extinf, stream_url))
+              i = 0
+              while i < len(lines):
+                  line = lines[i].strip()
+                  if line.startswith("#EXTINF:"):
+                      extinf = normalize_extinf(line)
+                      name = channel_name(extinf).lower()
 
-entries.sort(key=lambda x: x[0])
+                      j = i + 1
+                      stream_url = ""
+                      while j < len(lines):
+                          candidate = lines[j].strip()
+                          if candidate and not candidate.startswith("#"):
+                              stream_url = candidate
+                              break
+                          j += 1
 
-epg_url = "https://iptv-org.github.io/epg/guides/arabic.channels.xml.gz"
+                      blocked_names = [
+                          "al aula hd",
+                          "al aoula hd",
+                          "al oula hd",
+                          "aloula hd"
+                      ]
 
-with open("output/playlist.m3u", "w", encoding="utf-8") as f:
-    f.write(f'#EXTM3U x-tvg-url="{epg_url}"\n')
-    for _, extinf, stream_url in entries:
-        f.write(extinf + "\n")
-        f.write(stream_url + "\n")
+                      if stream_url and stream_url not in seen_urls and not any(b in name for b in blocked_names):
+                          seen_urls.add(stream_url)
+                          entries.append((name, extinf, stream_url))
+
+                      i = j
+                  i += 1
+
+          manual_channels = [
+              (
+                  "abu dhabi tv",
+                  '#EXTINF:-1 tvg-id="AbuDhabiTV.ae" tvg-name="Abu Dhabi TV" tvg-logo="https://upload.wikimedia.org/wikipedia/en/2/2d/Abu_Dhabi_TV_logo.png" group-title="Arabic IPTV",Abu Dhabi TV',
+                  "https://vo-live-media.cdb.cdn.orange.com/Content/Channel/AbuDhabiTV/HLS/index.m3u8"
+              ),
+              (
+                  "al aoula international",
+                  '#EXTINF:-1 tvg-id="AlAoula.ma@Inter" tvg-name="Al Aoula International" tvg-logo="https://i.imgur.com/5Q7aW5C.png" group-title="Arabic IPTV",Al Aoula International',
+                  "https://uvotv-aniview.global.ssl.fastly.net/hls/live/2119051/aloulainter/playlist.m3u8"
+              )
+          ]
+
+          for name, extinf, stream_url in manual_channels:
+              if stream_url not in seen_urls:
+                  seen_urls.add(stream_url)
+                  entries.append((name.lower(), extinf, stream_url))
+
+          entries.sort(key=lambda x: x[0])
+
+          epg_url = "https://iptv-org.github.io/epg/guides/arabic.channels.xml.gz"
+
+          with open("output/playlist.m3u", "w", encoding="utf-8") as f:
+              f.write(f'#EXTM3U x-tvg-url="{epg_url}"\n')
+              for _, extinf, stream_url in entries:
+                  f.write(extinf + "\n")
+                  f.write(stream_url + "\n")
+          PY
+
+      - name: Commit generated playlist
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/playlist.m3u
+          git commit -m "Update IPTV playlist" || echo "No changes to commit"
+          git push
