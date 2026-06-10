@@ -33,10 +33,6 @@ https://shd-gcp-live.edgenextcdn.net/live/bitmovin-hadath/2ff87ec4c2f3ede35295a2
 https://live-hls-apps-ajd-fa.getaj.net/AJD/index.m3u8
 #EXTINF:-1 tvg-id="AlMaarefTV.qa@SD" tvg-logo="https://i.imgur.com/QFnztgo.png" group-title="Arabic IPTV",Al Maaref TV (1080p)
 https://bucharest.zeuscdn724.com/lb0/CH-AL-MA/index.m3u8
-#EXTINF:-1 tvg-id="AlMaghribia.ma@SD" tvg-logo="https://i.imgur.com/7GaahYh.png" group-title="Arabic IPTV",Al Maghribia (720p) [Geo-Blocked]
-https://viamotionhsi.netplus.ch/live/eds/almaghribia/browser-dash/almaghribia.mpd
-#EXTINF:-1 tvg-id="AlMasriyah.eg@SD" tvg-logo="https://i.ibb.co/Kx7wmXCQ/almasriya.png" group-title="Arabic IPTV",Al Masriyah (720p) [Geo-Blocked]
-https://viamotionhsi.netplus.ch/live/eds/almasriyah/browser-HLS8/almasriyah.m3u8
 #EXTINF:-1 tvg-id="AlQuranAlKareemTV.sa@SD" tvg-logo="https://aloula.faulio.com/storage/mediagallery/da/6c/fullhd_7eaf7e165c4cad5b3a45eff65d2011e18be5d670.png" group-title="Arabic IPTV",Al Quran Al Kareem TV (1080p)
 https://aloula-redirect.vercel.app/7/playlist.m3u8
 #EXTINF:-1 tvg-id="AlRayyanTV.qa@SD" tvg-logo="https://i.imgur.com/Ts3RjTV.png" group-title="Arabic IPTV",Al Rayyan (1080p)
