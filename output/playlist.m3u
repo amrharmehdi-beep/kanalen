@@ -1,5 +1,5 @@
 #EXTM3U x-tvg-url="https://iptv-org.github.io/epg/guides/arabic.channels.xml.gz"
-#EXTINF:-1 tvg-id="2M.ma@SD" tvg-logo="https://i.imgur.com/PJYTfHi.png" group-title="Arabic IPTV",2M
+#EXTINF:-1 tvg-id="2M.ma@SD" tvg-logo="https://i.imgur.com/PJYTfHi.png" group-title="Arabic IPTV",2M (576p)
 http://185.9.2.18/chid_218/index.m3u8
 #EXTINF:-1 tvg-id="2MMonde.ma@SD" tvg-logo="https://i.imgur.com/MvpntzA.png" http-referrer="http://www.radio2m.ma/" http-user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0" group-title="Arabic IPTV",2M Monde (360p)
 https://cdn-globecast.akamaized.net/live/eds/2m_monde/hls_video_ts_tuhawxpiemz257adfc/2m_monde.m3u8
@@ -34,7 +34,7 @@ https://bucharest.zeuscdn724.com/lb0/CH-AL-MA/index.m3u8
 #EXTINF:-1 tvg-id="AlMaghribia.ma@SD" tvg-logo="https://i.imgur.com/7GaahYh.png" group-title="Arabic IPTV",Al Maghribia (1080p)
 http://185.9.2.18/chid_205/index.m3u8
 #EXTINF:-1 tvg-id="AlMashhad.ae@SD" tvg-logo="https://i.imgur.com/6G6fxs5.png" group-title="Arabic IPTV",Al Mashhad (1080p)
-https://amg30483-amg30483c23-amgplt0794.playout.now3.amagi.tv/ts-ap-s1-n1/playlist/amg30483-amg30483c23-amgplt0794/playlist.m3u8?ads.appversion=[APP_VERSION]&ads.devicemodel=[DEVICE_MODEL]&ads.lat=[LMT]&ads.bundleid=[APP_BUNDLE]&ads.donotsell=[DNS]&ads.ifa=[IFA]&ads.targetad=[TARGETAD_ALLOWED]&ads.appstoreurl=[APP_STOREURL]&ads.deviceid=[DEVICE_ID]&ads.devicemake=[DEVICE_MAKE]&ads.devicetype=[DEVICE_TYPE]&ads.gdpr=[GDPR]&ads.gdprconsent=[GDPR_CONSENT]&ads.ifatype=[IFA_TYPE]&ads.ip=[IP]&ads.appname=[APP_NAME]&ads.country=[COUNTRY]&ads.fck=[FCK]&ads.givn=[NONCE]&ads.ua=[UA]&ads.usprivacy=[US_PRIVACY]&ads.viewsize=[VIEWSIZE]&ads.coppa=0&ads.ic=[IC]&ads.network_name=[networkname]
+https://amg30483-amg30483c23-amgplt0794.playout.now3.amagi.tv/ts-ap-s1-n1/playlist/amg30483-amg30483c23-amgplt0794/playlist.m3u8?ads.appname=[APP_NAME]&ads.appstoreurl=[APP_STOREURL]&ads.appversion=[APP_VERSION]&ads.bundleid=[APP_BUNDLE]&ads.coppa=0&ads.country=[COUNTRY]&ads.deviceid=[DEVICE_ID]&ads.devicemake=[DEVICE_MAKE]&ads.devicemodel=[DEVICE_MODEL]&ads.devicetype=[DEVICE_TYPE]&ads.donotsell=[DNS]&ads.fck=[FCK]&ads.gdpr=[GDPR]&ads.gdprconsent=[GDPR_CONSENT]&ads.givn=[NONCE]&ads.ic=[IC]&ads.ifa=[IFA]&ads.ifatype=[IFA_TYPE]&ads.ip=[IP]&ads.lat=[LMT]&ads.network_name=[networkname]&ads.targetad=[TARGETAD_ALLOWED]&ads.ua=[UA]&ads.usprivacy=[US_PRIVACY]&ads.viewsize=[VIEWSIZE]
 #EXTINF:-1 tvg-id="AlMasriyah.eg@SD" tvg-logo="https://i.ibb.co/Kx7wmXCQ/almasriya.png" group-title="Arabic IPTV",Al Masriyah (1080p)
 http://185.9.2.18/chid_247/index.m3u8
 #EXTINF:-1 tvg-id="AlQuranAlKareemTV.sa@SD" tvg-logo="https://aloula.faulio.com/storage/mediagallery/da/6c/fullhd_7eaf7e165c4cad5b3a45eff65d2011e18be5d670.png" group-title="Arabic IPTV",Al Quran Al Kareem TV (720p)
