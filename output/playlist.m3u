@@ -83,6 +83,8 @@ https://stream.atvsat.com/atvsatlive/smil:atvsatlive.smil/playlist.m3u8
 https://shd-amg-fast.edgenextcdn.net/tx010/playlist.m3u8
 #EXTINF:-1 tvg-id="BigTimePlus.sa@SD" tvg-logo="https://shahid.mbc.net/mediaObject/4e042cb6-500b-4e4c-a8ca-21a5a7a7a71b" group-title="Arabic IPTV",Big Time Plus (1080p)
 https://shd-gcp-live.edgenextcdn.net/live/bitmovin-big-time-plus/924283f994779a311c1389698ff7e736/index.m3u8
+#EXTINF:-1 tvg-id="BTLTV.nl@SD" tvg-logo="https://yt3.googleusercontent.com/ytc/APkrFKZYgQTsDhkbaqmPRCPZIf0UgZqF1wa6aG2eo8ti=s176-c-k-c0x00ffffff-no-rj-mo" group-title="Arabic IPTV",BTL TV (Netherlands) (1080p)
+https://cdn.liveplustv.com/v1/live/btl-tv/master.m3u8
 #EXTINF:-1 tvg-id="ChadaTV.ma@SD" tvg-logo="https://freebox.cdn.scw.iliad.fr/medium_Logo_chada_tv_2ee1412d38.png" group-title="Arabic IPTV",Chada TV (720p)
 https://edge13.vedge.infomaniak.com/livecast/ik:chadatv/manifest.m3u8
 #EXTINF:-1 tvg-id="CNA.dz@SD" tvg-logo="https://i.imgur.com/Ki3ySUE.png" group-title="Arabic IPTV",CNA (Algeria) (360p) [Not 24/7]
